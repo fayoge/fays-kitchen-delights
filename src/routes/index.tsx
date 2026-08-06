@@ -187,9 +187,9 @@ function Home() {
               <p className="eyebrow opacity-80">Shipping</p>
               <h2 className="mt-3 text-4xl">Domestic U.S. shipping, packed to travel</h2>
               <p className="mt-4 leading-relaxed opacity-90">
-                Jars are sealed, wrapped and boxed for the trip. Flat $9.50 shipping
-                anywhere in the United States, free over $75. Orders go out within two to
-                three business days.
+                Jars are sealed, wrapped and boxed for the trip. We ship anywhere in the
+                United States — shipping is calculated at checkout. Orders go out within
+                two to three business days.
               </p>
             </div>
           </div>
