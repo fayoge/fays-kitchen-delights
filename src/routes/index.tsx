@@ -1,12 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Flame, Leaf, Truck, ShieldCheck } from "lucide-react";
-import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { Flame, Leaf, Truck, ShieldCheck, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
-import { useCart } from "@/lib/cart";
-import { formatPrice, products, type Product } from "@/lib/products";
+import { ProductCard } from "@/components/ProductCard";
+import { fetchProducts } from "@/lib/shopify";
 
 import jarsPair from "@/assets/jars-pair.jpg.asset.json";
 import peppers from "@/assets/peppers.jpg.asset.json";
