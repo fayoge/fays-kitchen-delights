@@ -124,7 +124,7 @@ export function CartSheet() {
           })}
         </div>
 
-        <SheetFooter className="gap-3">
+        <SheetFooter className="flex-col gap-3 sm:flex-col sm:space-x-0">
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">Subtotal</span>
             <span className="font-medium tabular-nums">
