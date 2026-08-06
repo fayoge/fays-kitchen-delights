@@ -86,6 +86,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Small-batch Haitian pikliz, Vinigratte, smoked herring pepper sauce and epis, made by hand and shipped across the U.S.",
       },
       { name: "author", content: "FaysKitchen" },
+      { name: "wb:op", content: "dfb5927b7ae28332dd30ad1124da8f10" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
