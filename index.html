@@ -360,28 +360,20 @@ function render(){
 }
 render();
 
-document.getElementById('goCheckout').onclick=()=>{closeD();document.body.classList.add('view-checkout');scrollTo(0,0)};
-const back=()=>{document.body.classList.remove('view-checkout');scrollTo(0,0)};
-document.getElementById('backBtn').onclick=back;
-document.getElementById('backBrand').onclick=e=>{e.preventDefault();back()};
-
-// checkout validation
-const RULES={
- email:v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)||'Enter a valid email',
- fullName:v=>v.trim().length>=2||'Enter your full name',
- address1:v=>v.trim().length>=3||'Enter your street address',
- city:v=>v.trim().length>=2||'Enter your city',
- state:v=>/^[A-Za-z]{2}$/.test(v.trim())||'Use the 2-letter state code',
- zip:v=>/^\d{5}(-\d{4})?$/.test(v.trim())||'Enter a valid ZIP code'};
-document.getElementById('coForm').onsubmit=e=>{
-  e.preventDefault();let ok=true;
-  document.querySelectorAll('.err').forEach(p=>p.textContent='');
-  for(const k in RULES){const r=RULES[k](document.getElementById(k).value);
-    if(r!==true){ok=false;document.querySelector(`.err[data-for="${k}"]`).textContent=r}}
-  if(!ok){toast('Please check the highlighted fields');return}
-  // TODO: send the order to your payment processor here.
-  toast('Details look good — connect your payment processor to finish.');
-};
+// Real Stripe checkout: hand the basket off to the secure Stripe-powered checkout.
+const CHECKOUT_BASE='https://fays-kitchen-delights.lovable.app/checkout';
+const STRIPE_PRICES={
+ 'traditional-pikliz':{'8oz':'pikliz_traditional_8oz','16oz':'pikliz_traditional_16oz'},
+ 'vinigratte':{'8oz':'vinigratte_8oz','16oz':'vinigratte_16oz'},
+ 'smoked-herring-pepper-sauce':{'8oz':'pepper_sauce_8oz','16oz':'pepper_sauce_16oz'},
+ 'haitian-epise':{'8oz':'epise_8oz','16oz':'epise_16oz'}};
+function goToStripeCheckout(){
+  const parts=cart.map(l=>{const m=STRIPE_PRICES[l.productId];const id=m&&m[l.sizeId];return id?`${id}:${l.qty}`:null}).filter(Boolean);
+  if(!parts.length){toast('Your basket is empty');return}
+  window.location.href=`${CHECKOUT_BASE}?items=${encodeURIComponent(parts.join(','))}`;
+}
+document.getElementById('goCheckout').onclick=goToStripeCheckout;
+document.getElementById('coForm').onsubmit=e=>{e.preventDefault();goToStripeCheckout()};
 </script>
 </body>
 </html>
