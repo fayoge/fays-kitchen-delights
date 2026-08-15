@@ -150,12 +150,17 @@ export const sendShippingNotification = createServerFn({ method: "POST" })
       return { error: e instanceof Error ? e.message : "Could not send the email." };
     }
 
-    const patch: Record<string, unknown> = { shipping_notified_at: new Date().toISOString() };
-    if (order.status !== "completed") {
-      patch["status"] = "shipped";
-      if (!order.shipped_at) patch["shipped_at"] = new Date().toISOString();
-    }
+    const patch = {
+      shipping_notified_at: new Date().toISOString(),
+      ...(order.status !== "completed"
+        ? {
+            status: "shipped" as const,
+            ...(order.shipped_at ? {} : { shipped_at: new Date().toISOString() }),
+          }
+        : {}),
+    };
     await context.supabase.from("orders").update(patch).eq("id", data.id);
+
 
     return { ok: true };
   });
