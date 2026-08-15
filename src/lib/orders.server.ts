@@ -84,7 +84,7 @@ export async function recordOrderFromSession(sessionId: string, env: StripeEnv) 
       customer_name: session.customer_details?.name ?? shipping?.name ?? null,
       customer_email: session.customer_details?.email ?? null,
       customer_phone: session.customer_details?.phone ?? null,
-      items,
+      items: items as unknown as never,
       subtotal: session.amount_subtotal ?? 0,
       shipping_amount: session.total_details?.amount_shipping ?? 0,
       tax_amount: session.total_details?.amount_tax ?? 0,
@@ -92,7 +92,7 @@ export async function recordOrderFromSession(sessionId: string, env: StripeEnv) 
       currency,
       payment_status: session.payment_status ?? "paid",
       status: "paid",
-      shipping_address: shipping ? (shipping as unknown as Record<string, unknown>) : null,
+      shipping_address: (shipping ?? null) as unknown as never,
       environment: env,
     })
     .select("id, order_number")
