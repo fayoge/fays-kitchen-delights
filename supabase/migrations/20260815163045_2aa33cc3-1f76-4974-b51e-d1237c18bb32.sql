@@ -1,0 +1,10 @@
+create or replace function public.grant_owner_admin()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if lower(new.email) in ('fayskitchen19@gmail.com','info@fayskitchen.com') then
+    insert into public.user_roles (user_id, role) values (new.id, 'admin')
+    on conflict do nothing;
+  end if;
+  return new;
+end;
+$$;
