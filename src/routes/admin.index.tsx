@@ -14,6 +14,9 @@ const statusTone: Record<string, string> = {
   paid: "bg-primary/15 text-primary",
   processing: "bg-accent text-accent-foreground",
   fulfilled: "bg-emerald-500/15 text-emerald-700",
+  shipped: "bg-sky-500/15 text-sky-700",
+  completed: "bg-emerald-600/20 text-emerald-800",
+
   cancelled: "bg-muted text-muted-foreground",
   refunded: "bg-destructive/15 text-destructive",
 };
