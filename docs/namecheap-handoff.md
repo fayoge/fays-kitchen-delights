@@ -30,7 +30,7 @@ upload custom code — that reproduces the site exactly.
 >    Right column: photo of two jars of pikliz.
 > 3. Shop grid — 4 product cards (see Part 2 for exact copy). Each card: photo,
 >    Creole name in small terracotta caps, product name, 1–3 flame heat rating,
->    description, two size buttons (8 oz $14 / 16 oz $20), and an "Add to basket" button.
+>    description, three size buttons (8 oz $9.60 / 16 oz $18.40 / 32 oz $30.40; herring sauce only 8 oz $14 / 16 oz $20), and an "Add to basket" button.
 > 4. Our story — photo of Fay mixing a bowl of peppers next to the story text (Part 2),
 >    plus two small cards: "Peppers first" and "Nothing artificial".
 > 5. Photo strip — tray of mixed hot peppers (wide) + scotch bonnets (narrow).
@@ -54,7 +54,7 @@ upload custom code — that reproduces the site exactly.
 
 ## Part 2 — Product catalog (exact copy)
 
-Both sizes on every product: **8 oz jar — $14.00**, **16 oz jar — $20.00**.
+Sizes on every product except the herring sauce: **8 oz — $9.60**, **16 oz — $18.40**, **32 oz — $30.40**. Smoked Herring Pepper Sauce: **8 oz — $14.00**, **16 oz — $20.00**.
 
 | Product | Creole name | Heat | Description |
 |---|---|---|---|
@@ -260,7 +260,7 @@ aside.summary img{width:56px;height:56px;border-radius:8px;object-fit:cover}
   <section class="pad wrap" id="shop">
     <p class="eyebrow">The pantry</p>
     <h2 style="font-size:2.2rem;margin-top:12px">Four jars, one kitchen</h2>
-    <p style="margin-top:12px;color:var(--muted);max-width:36rem">Every jar is made in small batches and priced the same: 8 oz for $14, 16 oz for $20.</p>
+    <p style="margin-top:12px;color:var(--muted);max-width:36rem">Every jar is made in small batches and priced by the ounce: 8 oz $9.60, 16 oz $18.40, 32 oz $30.40 (Smoked Herring Pepper Sauce: 8 oz $14, 16 oz $20).</p>
     <div class="grid-products" id="grid"></div>
   </section>
 
@@ -373,7 +373,8 @@ aside.summary img{width:56px;height:56px;border-radius:8px;object-fit:cover}
 
 <script>
 const IMG='https://fays-kitchen-delights.lovable.app/__l5e/assets-v1/';
-const SIZES=[{id:'8oz',label:'8 oz jar',price:14},{id:'16oz',label:'16 oz jar',price:20}];
+const SIZES=[{id:'8oz',label:'8 oz jar',price:9.60},{id:'16oz',label:'16 oz jar',price:18.40},{id:'32oz',label:'32 oz jar',price:30.40}];
+const HERRING_SIZES=[{id:'8oz',label:'8 oz jar',price:14},{id:'16oz',label:'16 oz jar',price:20}];
 const SHIPPING_FLAT=9.5, FREE_SHIPPING=75;
 const PRODUCTS=[
  {id:'traditional-pikliz',name:'Traditional Pikliz',creole:'Pikliz Tradisyonèl',heat:3,
@@ -384,7 +385,7 @@ const PRODUCTS=[
   image:IMG+'52f60d78-3dc8-45d6-864b-cedbcab8587d/jars-pair.jpg',sizes:SIZES},
  {id:'smoked-herring-pepper-sauce',name:'Smoked Herring Pepper Sauce',creole:'Sòs Piman ak Aransò',heat:3,
   desc:'Smoked herring slow-blended with scotch bonnets, garlic and citrus. Savory and smoky up front, a long clean burn behind it. Spoon it over rice, fried plantain, eggs or fish.',
-  image:IMG+'d0badb19-8d66-4ad9-8d44-27b3857f1cb7/pepper-sauce.jpg',sizes:SIZES},
+  image:IMG+'d0badb19-8d66-4ad9-8d44-27b3857f1cb7/pepper-sauce.jpg',sizes:HERRING_SIZES},
  {id:'haitian-epise',name:'Haitian Epise',creole:'Epis',heat:1,
   desc:'Parsley, scallion, thyme, garlic, bell pepper and citrus, ground fresh into the seasoning base that carries Haitian cooking. Marinate meat, start a pot of rice, wake up anything.',
   image:IMG+'c9d3cac7-d9a8-448e-94cc-bb865fd56d53/epise.jpg',sizes:SIZES}];
