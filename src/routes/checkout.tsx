@@ -83,8 +83,8 @@ function CheckoutPage() {
         </Link>
         <h1 className="mt-6 text-4xl">Secure checkout</h1>
         <p className="mt-2 text-muted-foreground">
-          Payment is processed by Stripe. Shipping is calculated on the next step —
-          domestic U.S. only.
+          Payment is processed by Stripe. Domestic U.S. shipping is a flat $9.50 — free on
+          orders over $75.
         </p>
 
         {items.length === 0 ? (
