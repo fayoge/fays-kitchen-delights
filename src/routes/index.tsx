@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { Flame, Leaf, Truck, ShieldCheck, Loader2 } from "lucide-react";
+import { Flame, Leaf, Truck, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { ProductCard } from "@/components/ProductCard";
-import { fetchProducts } from "@/lib/shopify";
+import { PRODUCTS } from "@/lib/products";
 
 import jarsPair from "@/assets/jars-pair.jpg.asset.json";
 import peppers from "@/assets/peppers.jpg.asset.json";
