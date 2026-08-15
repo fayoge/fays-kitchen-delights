@@ -17,6 +17,8 @@ export type Database = {
       orders: {
         Row: {
           admin_notes: string | null
+          carrier: string | null
+          completed_at: string | null
           created_at: string
           currency: string
           customer_email: string | null
@@ -28,8 +30,10 @@ export type Database = {
           notified_at: string | null
           order_number: string
           payment_status: string
+          shipped_at: string | null
           shipping_address: Json | null
           shipping_amount: number
+          shipping_notified_at: string | null
           status: Database["public"]["Enums"]["order_status"]
           stripe_customer_id: string | null
           stripe_payment_intent_id: string | null
@@ -37,10 +41,13 @@ export type Database = {
           subtotal: number
           tax_amount: number
           total: number
+          tracking_number: string | null
           updated_at: string
         }
         Insert: {
           admin_notes?: string | null
+          carrier?: string | null
+          completed_at?: string | null
           created_at?: string
           currency?: string
           customer_email?: string | null
@@ -52,8 +59,10 @@ export type Database = {
           notified_at?: string | null
           order_number?: string
           payment_status?: string
+          shipped_at?: string | null
           shipping_address?: Json | null
           shipping_amount?: number
+          shipping_notified_at?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           stripe_customer_id?: string | null
           stripe_payment_intent_id?: string | null
@@ -61,10 +70,13 @@ export type Database = {
           subtotal?: number
           tax_amount?: number
           total?: number
+          tracking_number?: string | null
           updated_at?: string
         }
         Update: {
           admin_notes?: string | null
+          carrier?: string | null
+          completed_at?: string | null
           created_at?: string
           currency?: string
           customer_email?: string | null
@@ -76,8 +88,10 @@ export type Database = {
           notified_at?: string | null
           order_number?: string
           payment_status?: string
+          shipped_at?: string | null
           shipping_address?: Json | null
           shipping_amount?: number
+          shipping_notified_at?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           stripe_customer_id?: string | null
           stripe_payment_intent_id?: string | null
@@ -85,6 +99,7 @@ export type Database = {
           subtotal?: number
           tax_amount?: number
           total?: number
+          tracking_number?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -149,6 +164,8 @@ export type Database = {
         | "fulfilled"
         | "cancelled"
         | "refunded"
+        | "shipped"
+        | "completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -283,6 +300,8 @@ export const Constants = {
         "fulfilled",
         "cancelled",
         "refunded",
+        "shipped",
+        "completed",
       ],
     },
   },
