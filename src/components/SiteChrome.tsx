@@ -18,6 +18,10 @@ export function SiteHeader() {
           <a href="/#shipping" className="transition-colors hover:text-foreground">
             Shipping
           </a>
+          <a href="/#contact" className="transition-colors hover:text-foreground">
+            Contact
+          </a>
+
         </nav>
         <CartSheet />
       </div>
