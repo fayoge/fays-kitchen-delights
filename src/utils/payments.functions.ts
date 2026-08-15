@@ -55,8 +55,10 @@ export const createCartCheckoutSession = createServerFn({ method: "POST" })
           {
             shipping_rate_data: {
               type: "fixed_amount",
-              display_name: "Standard U.S. shipping",
-              fixed_amount: { amount: 950, currency: "usd" },
+              display_name: freeShipping
+                ? "Free U.S. shipping (orders $75+)"
+                : "Standard U.S. shipping",
+              fixed_amount: { amount: freeShipping ? 0 : 950, currency: "usd" },
               delivery_estimate: {
                 minimum: { unit: "business_day", value: 3 },
                 maximum: { unit: "business_day", value: 7 },

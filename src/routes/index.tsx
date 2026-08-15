@@ -176,8 +176,8 @@ function Home() {
               <h2 className="mt-3 text-4xl">Domestic U.S. shipping, packed to travel</h2>
               <p className="mt-4 leading-relaxed opacity-90">
                 Jars are sealed, wrapped and boxed for the trip. We ship anywhere in the
-                United States — shipping is calculated at checkout. Orders go out within
-                two to three business days.
+                United States for a flat $9.50 — and shipping is free on orders over $75.
+                Orders go out within two to three business days.
               </p>
             </div>
           </div>
