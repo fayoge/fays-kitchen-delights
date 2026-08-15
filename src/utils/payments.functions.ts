@@ -74,3 +74,45 @@ export const createCartCheckoutSession = createServerFn({ method: "POST" })
       return { error: getStripeErrorMessage(error) };
     }
   });
+
+export const getCheckoutSummary = createServerFn({ method: "POST" })
+  .inputValidator((data: { sessionId: string; environment: StripeEnv }) => {
+    if (!data.sessionId || !/^[a-zA-Z0-9_-]+$/.test(data.sessionId)) {
+      throw new Error("Invalid session id");
+    }
+    return data;
+  })
+  .handler(async ({ data }) => {
+    try {
+      const stripe = createStripeClient(data.environment);
+      const session = await stripe.checkout.sessions.retrieve(data.sessionId, {
+        expand: ["line_items"],
+      });
+      return {
+        status: session.status ?? "open",
+        paymentStatus: session.payment_status ?? "unpaid",
+        email: session.customer_details?.email ?? null,
+        name: session.customer_details?.name ?? null,
+        currency: session.currency ?? "usd",
+        amountTotal: session.amount_total ?? 0,
+        amountSubtotal: session.amount_subtotal ?? 0,
+        shippingAmount: session.total_details?.amount_shipping ?? 0,
+        shippingAddress:
+          (session as unknown as {
+            collected_information?: {
+              shipping_details?: {
+                address?: Record<string, string | null>;
+                name?: string | null;
+              };
+            };
+          }).collected_information?.shipping_details ?? null,
+        lineItems: (session.line_items?.data ?? []).map((li) => ({
+          description: li.description ?? "Item",
+          quantity: li.quantity ?? 1,
+          amountTotal: li.amount_total ?? 0,
+        })),
+      };
+    } catch (error) {
+      return { error: getStripeErrorMessage(error) };
+    }
+  });
