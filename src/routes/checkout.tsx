@@ -68,7 +68,7 @@ function CheckoutPage() {
     if ("error" in result) throw new Error(result.error);
     if (!result.clientSecret) throw new Error("Stripe did not return a client secret");
     return result.clientSecret;
-  }, []);
+  }, [itemsParam]);
 
   return (
     <div className="min-h-screen">
