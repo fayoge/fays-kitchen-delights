@@ -30,8 +30,9 @@ export const PRODUCTS: Product[] = [
     image: jarTop.url,
     imageAlt: "Open jar of traditional Haitian pikliz in golden brine",
     sizes: [
-      { priceId: "pikliz_traditional_8oz", label: "8 oz", amount: 14 },
-      { priceId: "pikliz_traditional_16oz", label: "16 oz", amount: 20 },
+      { priceId: "pikliz_traditional_8oz", label: "8 oz", amount: 9.6 },
+      { priceId: "pikliz_traditional_16oz", label: "16 oz", amount: 18.4 },
+      { priceId: "pikliz_traditional_32oz", label: "32 oz", amount: 30.4 },
     ],
   },
   {
