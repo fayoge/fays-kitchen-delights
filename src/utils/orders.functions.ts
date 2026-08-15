@@ -1,9 +1,21 @@
 import { createServerFn } from "@tanstack/react-start";
 
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { CARRIER_VALUES } from "@/lib/shipping";
 
-const STATUSES = ["paid", "processing", "fulfilled", "cancelled", "refunded"] as const;
+const STATUSES = [
+  "paid",
+  "processing",
+  "fulfilled",
+  "shipped",
+  "completed",
+  "cancelled",
+  "refunded",
+] as const;
 export type OrderStatus = (typeof STATUSES)[number];
+
+const isUuid = (id: string) => /^[0-9a-fA-F-]{36}$/.test(id);
+
 
 export const isAdminUser = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
