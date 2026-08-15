@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-export const CONTACT_EMAIL = "Fayskitchen19@gmail.com";
+export const CONTACT_EMAIL = "Info@fayskitchen.com";
 
 const contactSchema = z.object({
   name: z
