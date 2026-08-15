@@ -64,8 +64,10 @@ const codeStyle = {
   fontFamily: 'Courier, monospace',
   fontSize: '22px',
   fontWeight: 'bold' as const,
-  color: '#000000',
+  padding: '12px 16px',
+  borderRadius: '10px',
   margin: '0 0 30px',
+
 }
 const footer = {
   fontSize: '12px',
