@@ -1,10 +1,29 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Loader2, Send, Truck } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { formatMoney } from "@/lib/products";
-import { getOrder, updateOrderStatus, type OrderStatus } from "@/utils/orders.functions";
+import { CARRIERS, carrierLabel, trackingUrl } from "@/lib/shipping";
+import {
+  getOrder,
+  markOrderComplete,
+  sendShippingNotification,
+  updateOrderShipping,
+  updateOrderStatus,
+  type OrderStatus,
+} from "@/utils/orders.functions";
 
 export const Route = createFileRoute("/admin/$id")({
   component: OrderDetail,
@@ -14,6 +33,8 @@ const NEXT_STATUSES: OrderStatus[] = [
   "paid",
   "processing",
   "fulfilled",
+  "shipped",
+  "completed",
   "cancelled",
   "refunded",
 ];
@@ -21,19 +42,74 @@ const NEXT_STATUSES: OrderStatus[] = [
 function OrderDetail() {
   const { id } = Route.useParams();
   const queryClient = useQueryClient();
+  const [carrier, setCarrier] = useState("");
+  const [tracking, setTracking] = useState("");
 
   const { data, isLoading } = useQuery({
     queryKey: ["admin-order", id],
     queryFn: () => getOrder({ data: { id } }),
   });
 
+  const order = data && !("error" in data) ? data.order : null;
+
+  useEffect(() => {
+    if (!order) return;
+    setCarrier(order.carrier ?? "");
+    setTracking(order.tracking_number ?? "");
+  }, [order?.id, order?.carrier, order?.tracking_number]);
+
+  const refresh = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["admin-order", id] });
+    await queryClient.invalidateQueries({ queryKey: ["admin-orders"] });
+  };
+
   const mutation = useMutation({
     mutationFn: (status: OrderStatus) => updateOrderStatus({ data: { id, status } }),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["admin-order", id] });
-      await queryClient.invalidateQueries({ queryKey: ["admin-orders"] });
-    },
+    onSuccess: refresh,
   });
+
+  const shippingMutation = useMutation({
+    mutationFn: (markShipped: boolean) =>
+      updateOrderShipping({
+        data: { id, carrier, trackingNumber: tracking, markShipped },
+      }),
+    onSuccess: async (res) => {
+      if (res && "error" in res && res.error) {
+        toast.error(res.error);
+        return;
+      }
+      toast.success("Shipping details saved");
+      await refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const notifyMutation = useMutation({
+    mutationFn: () => sendShippingNotification({ data: { id } }),
+    onSuccess: async (res) => {
+      if (res && "error" in res && res.error) {
+        toast.error(res.error);
+        return;
+      }
+      toast.success("Shipping notification sent to the customer");
+      await refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const completeMutation = useMutation({
+    mutationFn: () => markOrderComplete({ data: { id } }),
+    onSuccess: async (res) => {
+      if (res && "error" in res && res.error) {
+        toast.error(res.error);
+        return;
+      }
+      toast.success("Order marked complete");
+      await refresh();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
 
   if (isLoading) {
     return (
