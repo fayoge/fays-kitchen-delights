@@ -133,7 +133,7 @@ function Home() {
                 </div>
                 <div className="rounded-lg border border-border bg-card p-4">
                   <Leaf className="size-5 text-accent-foreground" />
-                  <p className="mt-2 font-medium">Nothing artificial</p>
+                  <p className="mt-2 font-medium">Fresh Ingredients</p>
                   <p className="text-sm text-muted-foreground">
                     Vegetables, vinegar, herbs and spice. That&apos;s the whole list.
                   </p>
