@@ -170,6 +170,106 @@ function OrderDetail() {
         </div>
       </div>
 
+      <section className="mt-8 rounded-xl border border-border p-6">
+        <h2 className="flex items-center gap-2 font-display text-xl">
+          <Truck className="size-5" /> Shipping
+        </h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="carrier">Carrier (U.S.)</Label>
+            <Select value={carrier} onValueChange={setCarrier}>
+              <SelectTrigger id="carrier">
+                <SelectValue placeholder="Select a carrier" />
+              </SelectTrigger>
+              <SelectContent>
+                {CARRIERS.map((c) => (
+                  <SelectItem key={c.value} value={c.value}>
+                    {c.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="tracking">Tracking number</Label>
+            <Input
+              id="tracking"
+              value={tracking}
+              onChange={(e) => setTracking(e.target.value.toUpperCase())}
+              placeholder="e.g. 9400111899223197428490"
+            />
+          </div>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Button
+            variant="outline"
+            disabled={shippingMutation.isPending}
+            onClick={() => shippingMutation.mutate(false)}
+          >
+            Save tracking
+          </Button>
+          <Button
+            disabled={shippingMutation.isPending || !tracking || !carrier}
+            onClick={() => shippingMutation.mutate(true)}
+          >
+            <Truck className="size-4" /> Mark shipped
+          </Button>
+          <Button
+            variant="secondary"
+            disabled={notifyMutation.isPending || !order.customer_email}
+            onClick={() => notifyMutation.mutate()}
+          >
+            {notifyMutation.isPending ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Send className="size-4" />
+            )}
+            Send shipped notification
+          </Button>
+          <Button
+            variant="outline"
+            disabled={completeMutation.isPending || order.status === "completed"}
+            onClick={() => completeMutation.mutate()}
+          >
+            <CheckCircle2 className="size-4" /> Mark order complete
+          </Button>
+        </div>
+
+        <dl className="mt-4 space-y-1 text-sm text-muted-foreground">
+          <div>
+            Saved: {carrierLabel(order.carrier)} · {order.tracking_number ?? "no tracking number"}
+            {trackingUrl(order.carrier, order.tracking_number) ? (
+              <>
+                {" "}
+                ·{" "}
+                <a
+                  className="underline"
+                  href={trackingUrl(order.carrier, order.tracking_number)!}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Track package
+                </a>
+              </>
+            ) : null}
+          </div>
+          <div>
+            Shipped: {order.shipped_at ? new Date(order.shipped_at).toLocaleString() : "not yet"}
+          </div>
+          <div>
+            Customer notified:{" "}
+            {order.shipping_notified_at
+              ? new Date(order.shipping_notified_at).toLocaleString()
+              : "not yet"}
+          </div>
+          <div>
+            Completed:{" "}
+            {order.completed_at ? new Date(order.completed_at).toLocaleString() : "not yet"}
+          </div>
+        </dl>
+      </section>
+
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         <section className="rounded-xl border border-border p-6">
           <h2 className="font-display text-xl">Customer</h2>
