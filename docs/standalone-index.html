@@ -163,7 +163,7 @@ aside.summary img{width:56px;height:56px;border-radius:8px;object-fit:cover}
   <section class="pad wrap" id="shop">
     <p class="eyebrow">The pantry</p>
     <h2 style="font-size:2.2rem;margin-top:12px">Four jars, one kitchen</h2>
-    <p style="margin-top:12px;color:var(--muted);max-width:36rem">Every jar is made in small batches and priced the same: 8 oz for $14, 16 oz for $20.</p>
+    <p style="margin-top:12px;color:var(--muted);max-width:36rem">Every jar is made in small batches and priced by the ounce: 8 oz $9.60, 16 oz $18.40, 32 oz $30.40 (Smoked Herring Pepper Sauce: 8 oz $14, 16 oz $20).</p>
     <div class="grid-products" id="grid"></div>
   </section>
 
@@ -276,7 +276,8 @@ aside.summary img{width:56px;height:56px;border-radius:8px;object-fit:cover}
 
 <script>
 const IMG='https://fays-kitchen-delights.lovable.app/__l5e/assets-v1/';
-const SIZES=[{id:'8oz',label:'8 oz jar',price:14},{id:'16oz',label:'16 oz jar',price:20}];
+const SIZES=[{id:'8oz',label:'8 oz jar',price:9.60},{id:'16oz',label:'16 oz jar',price:18.40},{id:'32oz',label:'32 oz jar',price:30.40}];
+const HERRING_SIZES=[{id:'8oz',label:'8 oz jar',price:14},{id:'16oz',label:'16 oz jar',price:20}];
 const SHIPPING_FLAT=9.5, FREE_SHIPPING=75;
 const PRODUCTS=[
  {id:'traditional-pikliz',name:'Traditional Pikliz',creole:'Pikliz Tradisyonèl',heat:3,
@@ -287,7 +288,7 @@ const PRODUCTS=[
   image:IMG+'52f60d78-3dc8-45d6-864b-cedbcab8587d/jars-pair.jpg',sizes:SIZES},
  {id:'smoked-herring-pepper-sauce',name:'Smoked Herring Pepper Sauce',creole:'Sòs Piman ak Aransò',heat:3,
   desc:'Smoked herring slow-blended with scotch bonnets, garlic and citrus. Savory and smoky up front, a long clean burn behind it. Spoon it over rice, fried plantain, eggs or fish.',
-  image:IMG+'d0badb19-8d66-4ad9-8d44-27b3857f1cb7/pepper-sauce.jpg',sizes:SIZES},
+  image:IMG+'d0badb19-8d66-4ad9-8d44-27b3857f1cb7/pepper-sauce.jpg',sizes:HERRING_SIZES},
  {id:'haitian-epise',name:'Haitian Epise',creole:'Epis',heat:1,
   desc:'Parsley, scallion, thyme, garlic, bell pepper and citrus, ground fresh into the seasoning base that carries Haitian cooking. Marinate meat, start a pot of rice, wake up anything.',
   image:IMG+'c9d3cac7-d9a8-448e-94cc-bb865fd56d53/epise.jpg',sizes:SIZES}];
@@ -363,10 +364,10 @@ render();
 // Real Stripe checkout: hand the basket off to the secure Stripe-powered checkout.
 const CHECKOUT_BASE='https://fays-kitchen-delights.lovable.app/checkout';
 const STRIPE_PRICES={
- 'traditional-pikliz':{'8oz':'pikliz_traditional_8oz','16oz':'pikliz_traditional_16oz'},
- 'vinigratte':{'8oz':'vinigratte_8oz','16oz':'vinigratte_16oz'},
+ 'traditional-pikliz':{'8oz':'pikliz_traditional_8oz','16oz':'pikliz_traditional_16oz','32oz':'pikliz_traditional_32oz'},
+ 'vinigratte':{'8oz':'vinigratte_8oz','16oz':'vinigratte_16oz','32oz':'vinigratte_32oz'},
  'smoked-herring-pepper-sauce':{'8oz':'pepper_sauce_8oz','16oz':'pepper_sauce_16oz'},
- 'haitian-epise':{'8oz':'epise_8oz','16oz':'epise_16oz'}};
+ 'haitian-epise':{'8oz':'epise_8oz','16oz':'epise_16oz','32oz':'epise_32oz'}};
 function goToStripeCheckout(){
   const parts=cart.map(l=>{const m=STRIPE_PRICES[l.productId];const id=m&&m[l.sizeId];return id?`${id}:${l.qty}`:null}).filter(Boolean);
   if(!parts.length){toast('Your basket is empty');return}

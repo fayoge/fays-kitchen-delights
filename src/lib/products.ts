@@ -30,8 +30,9 @@ export const PRODUCTS: Product[] = [
     image: jarTop.url,
     imageAlt: "Open jar of traditional Haitian pikliz in golden brine",
     sizes: [
-      { priceId: "pikliz_traditional_8oz", label: "8 oz", amount: 14 },
-      { priceId: "pikliz_traditional_16oz", label: "16 oz", amount: 20 },
+      { priceId: "pikliz_traditional_8oz", label: "8 oz", amount: 9.6 },
+      { priceId: "pikliz_traditional_16oz", label: "16 oz", amount: 18.4 },
+      { priceId: "pikliz_traditional_32oz", label: "32 oz", amount: 30.4 },
     ],
   },
   {
@@ -43,8 +44,9 @@ export const PRODUCTS: Product[] = [
     image: jarsPair.url,
     imageAlt: "Two jars of Vinigratte pikliz on a marble counter",
     sizes: [
-      { priceId: "vinigratte_8oz", label: "8 oz", amount: 14 },
-      { priceId: "vinigratte_16oz", label: "16 oz", amount: 20 },
+      { priceId: "vinigratte_8oz", label: "8 oz", amount: 9.6 },
+      { priceId: "vinigratte_16oz", label: "16 oz", amount: 18.4 },
+      { priceId: "vinigratte_32oz", label: "32 oz", amount: 30.4 },
     ],
   },
   {
@@ -69,8 +71,9 @@ export const PRODUCTS: Product[] = [
     image: episeImg.url,
     imageAlt: "Jar of fresh green Haitian epis seasoning",
     sizes: [
-      { priceId: "epise_8oz", label: "8 oz", amount: 14 },
-      { priceId: "epise_16oz", label: "16 oz", amount: 20 },
+      { priceId: "epise_8oz", label: "8 oz", amount: 9.6 },
+      { priceId: "epise_16oz", label: "16 oz", amount: 18.4 },
+      { priceId: "epise_32oz", label: "32 oz", amount: 30.4 },
     ],
   },
 ];

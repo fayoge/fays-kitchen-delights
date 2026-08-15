@@ -87,8 +87,8 @@ function Home() {
             <p className="eyebrow text-primary">The pantry</p>
             <h2 className="mt-3 text-4xl">Four jars, one kitchen</h2>
             <p className="mt-3 text-muted-foreground">
-              Every jar is made in small batches and priced the same: 8 oz for $14, 16 oz
-              for $20.
+              Every jar is made in small batches: 8 oz $9.60, 16 oz $18.40, 32 oz $30.40.
+              Smoked Herring Pepper Sauce is 8 oz $14 / 16 oz $20.
             </p>
           </div>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
