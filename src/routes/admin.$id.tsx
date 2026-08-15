@@ -119,12 +119,16 @@ function OrderDetail() {
     );
   }
 
-  if (!data || "error" in data) {
-    return <p className="py-20 text-center text-destructive">{data?.error ?? "Order not found"}</p>;
+  if (!data || "error" in data || !order) {
+    return (
+      <p className="py-20 text-center text-destructive">
+        {(data && "error" in data ? data.error : null) ?? "Order not found"}
+      </p>
+    );
   }
 
-  const order = data.order;
   const items = (order.items ?? []) as Array<{
+
     description: string;
     quantity: number;
     amountTotal: number;
