@@ -106,7 +106,9 @@ export function CartSheet() {
             <span className="font-medium tabular-nums">{formatMoney(totalPrice)}</span>
           </div>
           <p className="text-xs text-muted-foreground">
-            Shipping and taxes are calculated at checkout.
+            {totalPrice >= 75
+              ? "Free U.S. shipping applied at checkout."
+              : `Flat $9.50 U.S. shipping — free over $75 (${formatMoney(75 - totalPrice)} to go).`}
           </p>
           <Button
             className="w-full"

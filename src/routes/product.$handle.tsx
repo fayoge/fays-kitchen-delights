@@ -111,8 +111,8 @@ function ProductPage() {
               </Button>
 
               <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                <Truck className="size-4" /> Ships anywhere in the U.S. · calculated at
-                checkout
+                <Truck className="size-4" /> Ships anywhere in the U.S. · flat $9.50, free
+                over $75
               </p>
             </div>
           </div>

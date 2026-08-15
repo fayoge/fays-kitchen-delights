@@ -32,12 +32,17 @@ export const createCartCheckoutSession = createServerFn({ method: "POST" })
       const stripe = createStripeClient(data.environment);
 
       const lineItems = [];
+      let subtotal = 0;
       for (const item of data.items) {
         const prices = await stripe.prices.list({ lookup_keys: [item.priceId] });
         const price = prices.data[0];
         if (!price) throw new Error(`Price not found: ${item.priceId}`);
+        subtotal += (price.unit_amount ?? 0) * item.quantity;
         lineItems.push({ price: price.id, quantity: item.quantity });
       }
+
+      // Free U.S. shipping on orders of $75 or more.
+      const freeShipping = subtotal >= 7500;
 
       const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
@@ -50,8 +55,10 @@ export const createCartCheckoutSession = createServerFn({ method: "POST" })
           {
             shipping_rate_data: {
               type: "fixed_amount",
-              display_name: "Standard U.S. shipping",
-              fixed_amount: { amount: 950, currency: "usd" },
+              display_name: freeShipping
+                ? "Free U.S. shipping (orders $75+)"
+                : "Standard U.S. shipping",
+              fixed_amount: { amount: freeShipping ? 0 : 950, currency: "usd" },
               delivery_estimate: {
                 minimum: { unit: "business_day", value: 3 },
                 maximum: { unit: "business_day", value: 7 },
