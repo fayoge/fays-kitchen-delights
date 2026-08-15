@@ -84,15 +84,15 @@ export const updateOrderShipping = createServerFn({ method: "POST" })
     return { id: data.id, carrier, trackingNumber, markShipped: Boolean(data.markShipped) };
   })
   .handler(async ({ data, context }) => {
-    const patch: Record<string, unknown> = {
+    const patch = {
       carrier: data.carrier || null,
       tracking_number: data.trackingNumber || null,
+      ...(data.markShipped
+        ? { status: "shipped" as const, shipped_at: new Date().toISOString() }
+        : {}),
     };
-    if (data.markShipped) {
-      patch["status"] = "shipped";
-      patch["shipped_at"] = new Date().toISOString();
-    }
     const { error } = await context.supabase.from("orders").update(patch).eq("id", data.id);
+
     if (error) return { error: error.message };
     return { ok: true };
   });
