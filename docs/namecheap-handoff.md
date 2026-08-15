@@ -32,7 +32,7 @@ upload custom code — that reproduces the site exactly.
 >    Creole name in small terracotta caps, product name, 1–3 flame heat rating,
 >    description, three size buttons (8 oz $9.60 / 16 oz $18.40 / 32 oz $30.40; herring sauce only 8 oz $14 / 16 oz $20), and an "Add to basket" button.
 > 4. Our story — photo of Fay mixing a bowl of peppers next to the story text (Part 2),
->    plus two small cards: "Peppers first" and "Nothing artificial".
+>    plus two small cards: "Peppers first" and "Fresh Ingredients".
 > 5. Photo strip — tray of mixed hot peppers (wide) + scotch bonnets (narrow).
 > 6. Shipping band with a warm terracotta gradient background and white text:
 >    "Domestic U.S. shipping, packed to travel" — flat $9.50 shipping anywhere in the
@@ -74,7 +74,7 @@ Sizes on every product except the herring sauce: **8 oz — $9.60**, **16 oz —
 > every jar rests until the brine is right.
 
 - **Peppers first** — Scotch bonnets and bird peppers, picked for color and heat.
-- **Nothing artificial** — Vegetables, vinegar, herbs and spice. That's the whole list.
+- **Fresh Ingredients** — Vegetables, vinegar, herbs and spice. That's the whole list.
 
 **Image URLs** (the enhanced photos from this site — right-click → save, or paste the URL):
 
@@ -274,7 +274,7 @@ aside.summary img{width:56px;height:56px;border-radius:8px;object-fit:cover}
         <p>Nothing here is made ahead in bulk. Peppers get sorted by hand, onions cut thin, and every jar rests until the brine is right.</p>
         <div class="minicards">
           <div class="minicard"><span>🔥</span><p class="t">Peppers first</p><p class="s">Scotch bonnets and bird peppers, picked for color and heat.</p></div>
-          <div class="minicard"><span>🌿</span><p class="t">Nothing artificial</p><p class="s">Vegetables, vinegar, herbs and spice. That&rsquo;s the whole list.</p></div>
+          <div class="minicard"><span>🌿</span><p class="t">Fresh Ingredients</p><p class="s">Vegetables, vinegar, herbs and spice. That&rsquo;s the whole list.</p></div>
         </div>
       </div>
     </div>
