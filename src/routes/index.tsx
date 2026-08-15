@@ -32,10 +32,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const { data: products = [], isPending } = useQuery({
-    queryKey: ["shopify-products"],
-    queryFn: () => fetchProducts(20),
-  });
+
 
   return (
     <div className="min-h-screen">
