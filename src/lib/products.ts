@@ -1,7 +1,7 @@
-import jarTop from "@/assets/jar-top.jpg.asset.json";
+import jarTop from "@/assets/pikliz-traditional.jpg.asset.json";
 import jarsPair from "@/assets/jars-pair.jpg.asset.json";
 import pepperSauceImg from "@/assets/pepper-sauce.jpg.asset.json";
-import episeImg from "@/assets/epise.jpg.asset.json";
+import episeImg from "@/assets/epise-jars.jpg.asset.json";
 
 export interface ProductSize {
   /** Stripe price lookup id */
