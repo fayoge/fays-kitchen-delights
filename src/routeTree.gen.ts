@@ -14,6 +14,7 @@ import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CheckoutIndexRouteImport } from './routes/checkout.index'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
+import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,12 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
   path: '/product/$handle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicPaymentsWebhookRoute =
+  ApiPublicPaymentsWebhookRouteImport.update({
+    id: '/api/public/payments/webhook',
+    path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,12 +54,14 @@ export interface FileRoutesByFullPath {
   '/checkout/return': typeof CheckoutReturnRoute
   '/product/$handle': typeof ProductHandleRoute
   '/checkout/': typeof CheckoutIndexRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/product/$handle': typeof ProductHandleRoute
   '/checkout': typeof CheckoutIndexRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,13 +70,24 @@ export interface FileRoutesById {
   '/checkout/return': typeof CheckoutReturnRoute
   '/product/$handle': typeof ProductHandleRoute
   '/checkout/': typeof CheckoutIndexRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/checkout' | '/checkout/return' | '/product/$handle' | '/checkout/'
+    | '/'
+    | '/checkout'
+    | '/checkout/return'
+    | '/product/$handle'
+    | '/checkout/'
+    | '/api/public/payments/webhook'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/checkout/return' | '/product/$handle' | '/checkout'
+  to:
+    | '/'
+    | '/checkout/return'
+    | '/product/$handle'
+    | '/checkout'
+    | '/api/public/payments/webhook'
   id:
     | '__root__'
     | '/'
@@ -75,12 +95,14 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/product/$handle'
     | '/checkout/'
+    | '/api/public/payments/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ProductHandleRoute: typeof ProductHandleRoute
+  ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -120,6 +142,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/payments/webhook': {
+      id: '/api/public/payments/webhook'
+      path: '/api/public/payments/webhook'
+      fullPath: '/api/public/payments/webhook'
+      preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -141,6 +170,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRouteWithChildren,
   ProductHandleRoute: ProductHandleRoute,
+  ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
