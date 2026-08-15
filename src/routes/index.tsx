@@ -4,7 +4,9 @@ import { Flame, Leaf, Truck, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { ProductCard } from "@/components/ProductCard";
+import { ContactSection } from "@/components/ContactSection";
 import { PRODUCTS } from "@/lib/products";
+
 
 import jarsPair from "@/assets/jars-pair.jpg.asset.json";
 import peppers from "@/assets/peppers.jpg.asset.json";
@@ -182,7 +184,10 @@ function Home() {
             </div>
           </div>
         </section>
+
+        <ContactSection />
       </main>
+
 
       <SiteFooter />
     </div>
