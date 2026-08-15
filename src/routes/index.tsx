@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { Flame, Leaf, Truck, ShieldCheck, Loader2 } from "lucide-react";
+import { Flame, Leaf, Truck, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { ProductCard } from "@/components/ProductCard";
-import { fetchProducts } from "@/lib/shopify";
+import { PRODUCTS } from "@/lib/products";
 
 import jarsPair from "@/assets/jars-pair.jpg.asset.json";
 import peppers from "@/assets/peppers.jpg.asset.json";
@@ -33,10 +32,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const { data: products = [], isPending } = useQuery({
-    queryKey: ["shopify-products"],
-    queryFn: () => fetchProducts(20),
-  });
+
 
   return (
     <div className="min-h-screen">
@@ -95,19 +91,11 @@ function Home() {
               for $20.
             </p>
           </div>
-          {isPending ? (
-            <div className="flex justify-center py-16">
-              <Loader2 className="size-6 animate-spin text-muted-foreground" />
-            </div>
-          ) : products.length === 0 ? (
-            <p className="py-16 text-center text-muted-foreground">No products found.</p>
-          ) : (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {products.map((p) => (
-                <ProductCard key={p.node.id} product={p} />
-              ))}
-            </div>
-          )}
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PRODUCTS.map((p) => (
+              <ProductCard key={p.handle} product={p} />
+            ))}
+          </div>
         </section>
 
         {/* Story */}
