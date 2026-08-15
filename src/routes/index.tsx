@@ -91,19 +91,11 @@ function Home() {
               for $20.
             </p>
           </div>
-          {isPending ? (
-            <div className="flex justify-center py-16">
-              <Loader2 className="size-6 animate-spin text-muted-foreground" />
-            </div>
-          ) : products.length === 0 ? (
-            <p className="py-16 text-center text-muted-foreground">No products found.</p>
-          ) : (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {products.map((p) => (
-                <ProductCard key={p.node.id} product={p} />
-              ))}
-            </div>
-          )}
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PRODUCTS.map((p) => (
+              <ProductCard key={p.handle} product={p} />
+            ))}
+          </div>
         </section>
 
         {/* Story */}
